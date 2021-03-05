@@ -19,6 +19,8 @@ export { dev, port, app, handle };
     try {
         const connection = await connect();
 
+        await import("./server/api/auth/passport");
+
         const api = (await import("./server/api/api")).default;
 
         await app.prepare();
