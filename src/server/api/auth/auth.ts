@@ -69,4 +69,10 @@ auth.put("/signup", async (req, res) => {
     });
 });
 
+auth.get("/logout", (req, res) => {
+    if (req.user) req.logOut();
+
+    return res.redirect("/");
+});
+
 export default auth;

@@ -32,16 +32,17 @@ passport.use(
         },
         async (email, password, done) => {
             try {
-                if (!EMAIL_REGEX.test(email)) return done({ message: "Invalid email." }, undefined);
+                if (!EMAIL_REGEX.test(email))
+                    return done({ message: "Invalid email." }, undefined, { message: "Invalid email." });
 
                 const user = await users.findOne({
                     email,
                 });
 
-                if (!user) return done({ message: "User doesn't exist." }, undefined);
+                if (!user) return done({ message: "User doesn't exist." }, undefined, { message: "User doesn't exist." });
 
                 if (!(await argon2.verify(user.password, password)))
-                    return done({ message: "Password is incorrect." }, undefined);
+                    return done({ message: "Password is incorrect." }, undefined, { message: "Password is incorrect." });
 
                 return done(undefined, user);
             } catch (e) {
