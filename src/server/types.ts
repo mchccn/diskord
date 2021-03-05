@@ -1,0 +1,12 @@
+export type Permissions =
+    | "ADMINISTRATOR"
+    | "BAN_MEMBERS"
+    | "KICK_MEMBERS"
+    | "MANAGE_MESSAGES"
+    | "MANAGE_CHANNELS"
+    | "MANAGE_ROLES"
+    | "MANAGE_NICKNAMES"
+    | "SEND_MESSAGES"
+    | "READ_MESSAGES"
+    | "CREATE_INVITE"
+    | "CHANGE_NICKNAME";
