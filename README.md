@@ -5,14 +5,15 @@
 | STATUS | METHOD | ROUTE                                        |
 | ------ | ------ | -------------------------------------------- |
 | ✅     | POST   | `/auth/login `                               |
-| ✅     | PUT    | `/auth/login `                               |
+| ✅     | PUT    | `/auth/signup `                              |
+| ✅     | PATCH  | `/auth/change `                              |
 | ✅     | GET    | `/auth/logout `                              |
-| ❌     | PATCH  | `/user/appearance `                          |
-| ❌     | PATCH  | `/user/profile/username `                    |
-| ❌     | PATCH  | `/user/profile/avatar `                      |
-| ❌     | PATCH  | `/user/profile/status `                      |
-| ❌     | DELETE | `/user/delete `                              |
-| ❌     | PATCH  | `/user/servers `                             |
+| ✅     | PATCH  | `/user/appearance `                          |
+| ✅     | PATCH  | `/user/profile/username `                    |
+| ✅     | PATCH  | `/user/profile/avatar `                      |
+| ✅     | PATCH  | `/user/profile/status `                      |
+| ✅     | DELETE | `/user/delete `                              |
+| ✅     | PATCH  | `/user/servers `                             |
 | ❌     | PUT    | `/guilds/new `                               |
 | ❌     | POST   | `/guilds/join `                              |
 | ❌     | PATCH  | `/guilds/leave/:guild `                      |

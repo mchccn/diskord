@@ -14,6 +14,7 @@ export interface IUser extends Document {
     guilds: string[];
     blocked: string[];
     friends: string[];
+    status: string;
 }
 
 export const userSchema = new Schema({
@@ -65,6 +66,10 @@ export const userSchema = new Schema({
     friends: {
         type: [ObjectId],
         default: [],
+    },
+    status: {
+        type: String,
+        required: true,
     },
 });
 
