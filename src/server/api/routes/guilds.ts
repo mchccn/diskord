@@ -46,6 +46,11 @@ guilds.put("/new", async (req, res) => {
         guild: guild._id,
     });
 
+    await members.create({
+        user: user._id,
+        guild: guild._id,
+    });
+
     guild.channels.push(channel);
 
     await guild.save();
