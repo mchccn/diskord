@@ -3,6 +3,7 @@ import { ObjectId } from "mongodb";
 import { AUTHENTICATE, DEFAULT_ICON } from "../../constants";
 import channels from "../../database/models/channel";
 import { default as __guilds__ } from "../../database/models/guild";
+import invites from "../../database/models/invite";
 import members from "../../database/models/member";
 import users from "../../database/models/user";
 
@@ -55,11 +56,77 @@ guilds.put("/new", async (req, res) => {
 });
 
 guilds.post("/join", async (req, res) => {
-    // ! Join guild
+    const { id } = req.body;
+
+    if (!id)
+        return res.status(400).json({
+            message: "No invite was provided.",
+        });
+
+    if (!ObjectId.isValid(id))
+        return res.status(400).json({
+            message: "Invalid invite.",
+        });
+
+    const invite = await invites.findById(id);
+
+    if (!invite)
+        return res.status(400).json({
+            message: "Invalid invite.",
+        });
+
+    const guild = await __guilds__.findById(invite.guild);
+
+    if (!guild) {
+        await invite.delete();
+
+        return res.status(500).json({
+            message: "Guild does not exist anymore.",
+        });
+    }
+
+    //@ts-ignore
+    const user = (await users.findById(req.user!._id))!;
+
+    user.guilds.push(guild._id);
+
+    await user.save();
+
+    return res.status(200).json({
+        message: "You have joined the guild!",
+    });
 });
 
 guilds.patch("/leave", async (req, res) => {
-    // ! Leave guild
+    const { id } = req.body;
+
+    if (!id)
+        return res.status(400).json({
+            message: "No guild was provided.",
+        });
+
+    if (!ObjectId.isValid(id))
+        return res.status(400).json({
+            message: "Invalid ID.",
+        });
+
+    const guild = await __guilds__.findById(id);
+
+    if (!guild)
+        return res.status(400).json({
+            message: "No guild found.",
+        });
+
+    //@ts-ignore
+    const user = (await users.findById(req.user!._id))!;
+
+    user.guilds = user.guilds.filter((id) => id !== guild._id);
+
+    await user.save();
+
+    return res.status(200).json({
+        message: "You have left the guild!",
+    });
 });
 
 guilds.delete("/delete", async (req, res) => {

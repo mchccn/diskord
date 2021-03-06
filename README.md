@@ -15,9 +15,11 @@
 | ✅     | DELETE | `/user/delete `                              |
 | ✅     | PATCH  | `/user/servers `                             |
 | ✅     | PUT    | `/guilds/new `                               |
-| ❌     | POST   | `/guilds/join `                              |
-| ❌     | PATCH  | `/guilds/leave `                             |
+| ✅     | POST   | `/guilds/join `                              |
+| ✅     | PATCH  | `/guilds/leave `                             |
 | ✅     | DELETE | `/guilds/delete `                            |
+| ❌     | PUT    | `/guild/invites/new/:guild `                 |
+| ❌     | DELETE | `/guild/invites/delete/:guild `              |
 | ❌     | PUT    | `/guild/channels/:guild `                    |
 | ❌     | PUT    | `/guild/roles/:guild `                       |
 | ❌     | DELETE | `/guild/channels/:guild `                    |
@@ -34,8 +36,6 @@
 | ❌     | POST   | `/guild/members/:member/ban/:guild `         |
 | ❌     | POST   | `/guild/members/:member/unban/:guild `       |
 | ❌     | PATCH  | `/guild/members/:member/nickname `           |
-| ❌     | PUT    | `/guild/invites/new/:guild `                 |
-| ❌     | DELETE | `/guild/invites/delete/:guild `              |
 | ❌     | PUT    | `/friends/request/:user `                    |
 | ❌     | PUT    | `/friends/accept/:user `                     |
 | ❌     | PATCH  | `/users/block/:user `                        |
