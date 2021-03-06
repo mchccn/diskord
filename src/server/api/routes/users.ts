@@ -5,4 +5,8 @@ const users = Router();
 
 users.use(AUTHENTICATE);
 
+users.patch("/block", async (req, res) => {});
+
+users.patch("/unblock", async (req, res) => {});
+
 export default users;
