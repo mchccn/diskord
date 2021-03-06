@@ -7,3 +7,6 @@ export const AUTHENTICATE = (req: Request, res: Response, next: NextFunction) =>
 
     return next();
 };
+
+export const DEFAULT_ICON =
+    "https://images-ext-2.discordapp.net/external/2dZVVL6feMSM7lxfFkKVW__LToSOzmToSEmocJV5vcA/https/cdn.discordapp.com/embed/avatars/0.png";

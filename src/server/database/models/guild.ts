@@ -19,7 +19,7 @@ export const guildSchema = new Schema({
     },
     channels: {
         type: [channelSchema],
-        required: true,
+        default: [],
     },
     roles: {
         type: [roleSchema],

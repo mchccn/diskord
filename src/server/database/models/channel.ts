@@ -8,6 +8,7 @@ export interface IChannel extends Document {
     pinned: string[];
     nsfw: boolean;
     slowmode: number;
+    name: string;
 }
 
 export const channelSchema = new Schema({
@@ -30,6 +31,10 @@ export const channelSchema = new Schema({
     slowmode: {
         type: Number,
         default: 0,
+    },
+    name: {
+        type: String,
+        required: true,
     },
 });
 

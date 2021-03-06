@@ -1,7 +1,7 @@
 import argon2 from "argon2";
 import { Router } from "express";
 import passport from "passport";
-import { AUTHENTICATE, EMAIL_REGEX } from "../../constants";
+import { AUTHENTICATE, DEFAULT_ICON, EMAIL_REGEX } from "../../constants";
 import users from "../../database/models/user";
 
 const auth = Router();
@@ -70,8 +70,7 @@ auth.put("/signup", async (req, res) => {
         email,
         password: hashedPassword,
         username,
-        avatar:
-            "https://images-ext-2.discordapp.net/external/2dZVVL6feMSM7lxfFkKVW__LToSOzmToSEmocJV5vcA/https/cdn.discordapp.com/embed/avatars/0.png",
+        avatar: DEFAULT_ICON,
     });
 
     return res.status(200).json({
