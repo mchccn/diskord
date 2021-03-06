@@ -2,10 +2,9 @@
 
 ### Todo list:
 
--   [ ] Implement permissions check for routes
--   [ ] friend/unfriend system
--   [ ] block/unblock system
--   [ ] start on frontend for `/`
+-   Implement permissions check for routes
+-   block/unblock system
+-   start on frontend for `/`
 
 ### API Routes (prefixed with '/api')
 
