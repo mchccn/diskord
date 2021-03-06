@@ -24,10 +24,10 @@
 | ✅     | POST   | `/guilds/join `                              |
 | ✅     | PATCH  | `/guilds/leave `                             |
 | ✅     | DELETE | `/guilds/delete `                            |
-| ✅     | PUT    | `/guild/invites/new/ `                       |
-| ✅     | DELETE | `/guild/invites/delete/ `                    |
-| ✅     | PUT    | `/friends/request/ `                         |
-| ✅     | PUT    | `/friends/accept/ `                          |
+| ✅     | PUT    | `/guild/invites/new `                        |
+| ✅     | DELETE | `/guild/invites/delete `                     |
+| ✅     | PUT    | `/friends/request `                          |
+| ✅     | PUT    | `/friends/accept `                           |
 | ✅     | DELETE | `/friends/remove/ `                          |
 | ✅     | DELETE | `/friends/ignore/ `                          |
 | ❌     | PATCH  | `/users/block/:user `                        |
