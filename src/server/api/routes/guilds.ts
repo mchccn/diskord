@@ -80,7 +80,7 @@ guilds.post("/join", async (req, res) => {
     if (!guild) {
         await invite.delete();
 
-        return res.status(500).json({
+        return res.status(400).json({
             message: "Guild does not exist anymore.",
         });
     }

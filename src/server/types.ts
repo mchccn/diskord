@@ -8,5 +8,4 @@ export type Permissions =
     | "MANAGE_NICKNAMES"
     | "SEND_MESSAGES"
     | "READ_MESSAGES"
-    | "CREATE_INVITE"
     | "CHANGE_NICKNAME";

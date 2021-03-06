@@ -1,5 +1,12 @@
 # diskord
 
+### Todo list:
+
+-   [ ] Implement permissions check for routes
+-   [ ] friend/unfriend system
+-   [ ] block/unblock system
+-   [ ] start on frontend for `/`
+
 ### API Routes (prefixed with '/api')
 
 | STATUS | METHOD | ROUTE                                        |
@@ -18,8 +25,8 @@
 | ✅     | POST   | `/guilds/join `                              |
 | ✅     | PATCH  | `/guilds/leave `                             |
 | ✅     | DELETE | `/guilds/delete `                            |
-| ❌     | PUT    | `/guild/invites/new/:guild `                 |
-| ❌     | DELETE | `/guild/invites/delete/:guild `              |
+| ✅     | PUT    | `/guild/invites/new/ `                       |
+| ✅     | DELETE | `/guild/invites/delete/ `                    |
 | ❌     | PUT    | `/guild/channels/:guild `                    |
 | ❌     | PUT    | `/guild/roles/:guild `                       |
 | ❌     | DELETE | `/guild/channels/:guild `                    |
