@@ -1,10 +1,6 @@
 # diskord
 
-### Todo list:
-
--   Implement permissions check for routes
--   block/unblock system
--   start on frontend for `/`
+#### Implement permissions for routes.
 
 ### API Routes (prefixed with '/api')
 
