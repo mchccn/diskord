@@ -1,7 +1,8 @@
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Meta from "../components/meta";
 
-export default function Home() {
+export default function Home({ isLoggedIn }: { isLoggedIn: boolean }) {
     return (
         <div>
             <Meta />
@@ -13,8 +14,8 @@ export default function Home() {
                     <h1>Diskord</h1>
                     <p>a simple discord clone</p>
                     <section>
-                        <a href="/signup" className="discord">
-                            Sign Up
+                        <a href={isLoggedIn ? `/home` : `/login`} className="discord">
+                            {isLoggedIn ? "Open" : "Log In"}
                         </a>
                         <a href="/docs" className="docs">
                             Documentation
@@ -87,3 +88,12 @@ export default function Home() {
         </div>
     );
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+    return {
+        props: {
+            //@ts-ignore
+            isLoggedIn: !!ctx.req.user,
+        },
+    };
+};
