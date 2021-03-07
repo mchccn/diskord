@@ -30,8 +30,8 @@
 | ✅     | PUT    | `/friends/accept `                           |
 | ✅     | DELETE | `/friends/remove/ `                          |
 | ✅     | DELETE | `/friends/ignore/ `                          |
-| ❌     | PATCH  | `/users/block/:user `                        |
-| ❌     | PATCH  | `/users/unblock/:user `                      |
+| ✅     | PATCH  | `/users/block/:user `                        |
+| ✅     | PATCH  | `/users/unblock/:user `                      |
 | ❌     | POST   | `/users/channels/:user `                     |
 | ❌     | DELETE | `/users/channels/delete/:user `              |
 | ❌     | PUT    | `/users/channels/pin/:user `                 |
