@@ -81,4 +81,12 @@ users.patch("/unblock", async (req, res) => {
     });
 });
 
+users.post("/:user", async (req, res) => {});
+
+users.delete("/:user/delete", async (req, res) => {});
+
+users.put("/:user/pin", async (req, res) => {});
+
+users.patch("/:user/edit", async (req, res) => {});
+
 export default users;
