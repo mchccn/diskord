@@ -1,5 +1,7 @@
 # diskord
 
+#### Implement permissions for routes.
+
 ### API Routes (prefixed with '/api')
 
 | STATUS | METHOD | ROUTE                                        |
