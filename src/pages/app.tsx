@@ -1,3 +1,4 @@
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Meta from "../components/meta";
 
@@ -11,3 +12,9 @@ export default function DiskordApp() {
         </div>
     );
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+    return {
+        props: {},
+    };
+};
