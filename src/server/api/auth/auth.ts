@@ -21,8 +21,6 @@ auth.post("/login", async (req, res) => {
 });
 
 auth.put("/signup", async (req, res) => {
-    console.log(req.body);
-
     const { email, password, username } = req.body;
 
     if (!email || !EMAIL_REGEX.test(email))
@@ -73,9 +71,7 @@ auth.put("/signup", async (req, res) => {
         avatar: DEFAULT_ICON,
     });
 
-    return res.status(200).json({
-        message: "You have signed up!",
-    });
+    return res.sendStatus(200);
 });
 
 auth.patch("/change", AUTHENTICATE, async (req, res) => {
@@ -112,7 +108,7 @@ auth.patch("/change", AUTHENTICATE, async (req, res) => {
 
     await user.save();
 
-    return res.status(200).json({
+    return res.sendStatus(200).json({
         message: "Password was updated.",
     });
 });

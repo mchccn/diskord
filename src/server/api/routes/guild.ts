@@ -51,36 +51,25 @@ guild.delete("/invites/delete", async (req, res) => {
 
     if (!id)
         return res.status(400).json({
-            message: "No guild was provided.",
+            message: "No invite was provided.",
         });
 
     if (!ObjectId.isValid(id))
         return res.status(400).json({
-            message: "Invalid guild ID.",
+            message: "Invalid invite ID.",
         });
 
-    const guild = await guilds.findById(id);
+    const invite = await invites.findById(id);
 
-    if (!guild)
+    if (!invite)
         return res.status(400).json({
-            message: "Guild doesn't exist",
+            message: "Invite doesn't exist",
         });
 
-    const guildInvites = await invites.find({
-        guild: id,
-    });
-
-    if (guildInvites.length >= 10)
-        return res.status(403).json({
-            message: "This guild already has 10 invites.",
-        });
-
-    await invites.create({
-        guild: id,
-    });
+    await invite.delete();
 
     return res.status(200).json({
-        message: "Invite created.",
+        message: "Invite deleted.",
     });
 });
 

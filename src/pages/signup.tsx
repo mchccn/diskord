@@ -8,6 +8,7 @@ export default function Login() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [username, setUsername] = useState("");
     const [error, setError] = useState("");
 
     useEffect(() => {
@@ -18,18 +19,18 @@ export default function Login() {
         <div>
             <Meta />
             <Head>
-                <title>log in</title>
+                <title>sign up</title>
             </Head>
             <main>
                 <p>
-                    Don't have an account? <a href="/signup">Sign up!</a>
+                    Already an account? <a href="/login">Log in!</a>
                 </p>
                 <form
                     onSubmit={async (e) => {
                         e.preventDefault();
 
-                        const res = await fetch("/api/auth/login", {
-                            method: "POST",
+                        const res = await fetch("/api/auth/signup", {
+                            method: "PUT",
                             headers: {
                                 "Content-Type": "application/json",
                             },
@@ -37,6 +38,7 @@ export default function Login() {
                             body: JSON.stringify({
                                 email,
                                 password,
+                                username,
                             }),
                         });
 
@@ -53,7 +55,8 @@ export default function Login() {
                 >
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                    <input type="submit" value="Log In" />
+                    <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+                    <input type="submit" value="Sign up" />
                     <p>{error}</p>
                 </form>
             </main>
