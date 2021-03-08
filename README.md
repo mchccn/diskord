@@ -4,7 +4,7 @@
 
 #### Add websocket pings when a state is updated.
 
-### Regular Routes
+### Routes
 
 | STATUS | ROUTE                        |
 | ------ | ---------------------------- |
@@ -12,6 +12,7 @@
 | ❌     | `/app `                      |
 | ❌     | `/channels/:guild/:channel ` |
 | ❌     | `/users/:user `              |
+| ❌     | `/docs `                     |
 
 ### API Routes (prefixed with '/api')
 
