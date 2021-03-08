@@ -17,8 +17,10 @@ const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 const port = process.env.PORT || 3000;
+
 const server = express();
 const http = createServer(server);
+
 const io = new Server(http, {});
 const sockets: { [id: string]: Socket } = {};
 

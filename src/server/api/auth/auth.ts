@@ -8,12 +8,12 @@ const auth = Router();
 
 auth.post("/login", async (req, res) => {
     passport.authenticate("local", (error, user, info) => {
-        if (error) return res.json(error);
+        if (error) return res.status(401).json(error);
 
         if (!user) return res.redirect("/login");
 
         return req.logIn(user, (error) => {
-            if (error) return res.json(error);
+            if (error) return res.status(401).json(error);
 
             return res.redirect("/app");
         });
