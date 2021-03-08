@@ -9,6 +9,18 @@ export default function DiskordApp() {
             <Head>
                 <title>diskord app</title>
             </Head>
+            <div className="app">
+                <div className="servers"></div>
+            </div>
+            <style jsx>{`
+                .app {
+                    display: flex;
+                }
+
+                .servers {
+                    background-color: var(--clr-dark);
+                }
+            `}</style>
         </div>
     );
 }
