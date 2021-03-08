@@ -2,9 +2,13 @@ import MongoStore from "connect-mongo";
 import { config as dotenv } from "dotenv";
 import express from "express";
 import session from "express-session";
+import { createServer } from "http";
+import { ObjectId } from "mongodb";
 import next from "next";
 import passport from "passport";
+import { Server, Socket } from "socket.io";
 import connect from "./server/database/connect";
+import users from "./server/database/models/user";
 
 dotenv();
 
@@ -12,12 +16,16 @@ const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 const port = process.env.PORT || 3000;
+const server = express();
+const http = createServer(server);
+const io = new Server(http, {});
+const sockets: { [id: string]: Socket } = {};
 
-export { dev, port, app, handle };
+export { dev, port, app, handle, server, http, io };
 
 (async () => {
     try {
-        const connection = await connect();
+        await connect();
 
         await import("./server/api/auth/passport");
 
@@ -25,7 +33,17 @@ export { dev, port, app, handle };
 
         await app.prepare();
 
-        const server = express();
+        io.on("connection", async (socket: Socket) => {
+            socket.on("verify", async (id) => {
+                if (!ObjectId.isValid(id)) return socket.emit("invalid", id);
+
+                if (!(await users.findById(id))) return socket.emit("invalid", id);
+
+                sockets[id] = socket;
+
+                return socket.on("disconnect", () => delete sockets[id]);
+            });
+        });
 
         server.use(
             session({
@@ -59,7 +77,7 @@ export { dev, port, app, handle };
 
         server.get("*", (req, res) => handle(req, res));
 
-        server.listen(port, () => console.log("Server listening on port 3000!"));
+        http.listen(port, () => console.log("Server listening on port 3000!"));
     } catch (error) {
         console.error(error);
         process.exit(1);
