@@ -32,11 +32,6 @@ guild.put("/invites/new", async (req, res) => {
         guild: id,
     });
 
-    if (guildInvites.length >= 10)
-        return res.status(403).json({
-            message: "This guild already has 10 invites.",
-        });
-
     await invites.create({
         guild: id,
     });

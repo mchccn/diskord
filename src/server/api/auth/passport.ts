@@ -17,10 +17,10 @@ passport.deserializeUser<string>(async (email, done) => {
 
         if (user) return done(undefined, user);
 
-        return done(undefined, undefined);
+        return done(undefined, false);
     } catch (e) {
         console.log(e);
-        return done(e, undefined);
+        return done(e, false);
     }
 });
 

@@ -80,13 +80,7 @@ export { dev, port, app, handle, server, http, io };
 
         server.get("/login", (req, res) => (req.user ? res.redirect("/app") : handle(req, res)));
 
-        server.get("/users", (req, res) => res.redirect("/app"));
-        server.get("/channels", (req, res) => res.redirect("/app"));
-        server.get("/channels/:guild", (req, res) => res.redirect("/app"));
-
         server.use("/app", AUTHENTICATE);
-        server.use("/users/:user", AUTHENTICATE);
-        server.use("/channels/:guild/:channel", AUTHENTICATE);
 
         server.get("*", (req, res) => handle(req, res));
 

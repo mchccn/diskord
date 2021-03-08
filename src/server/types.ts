@@ -6,6 +6,7 @@ export type Permissions =
     | "MANAGE_CHANNELS"
     | "MANAGE_ROLES"
     | "MANAGE_NICKNAMES"
+    | "CREATE_INVITES"
     | "SEND_MESSAGES"
     | "READ_MESSAGES"
     | "CHANGE_NICKNAME";

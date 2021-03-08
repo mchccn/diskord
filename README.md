@@ -6,13 +6,11 @@
 
 ### Routes
 
-| STATUS | ROUTE                        |
-| ------ | ---------------------------- |
-| ✅     | `/ `                         |
-| ❌     | `/app `                      |
-| ❌     | `/channels/:guild/:channel ` |
-| ❌     | `/users/:user `              |
-| ❌     | `/docs `                     |
+| STATUS | ROUTE    |
+| ------ | -------- |
+| ✅     | `/ `     |
+| ❌     | `/app `  |
+| ❌     | `/docs ` |
 
 ### API Routes (prefixed with '/api')
 
@@ -34,17 +32,8 @@
 | ✅     | DELETE | `/guilds/delete `                                  |
 | ✅     | PUT    | `/guild/invites/new `                              |
 | ✅     | DELETE | `/guild/invites/delete `                           |
-| ✅     | PUT    | `/friends/request `                                |
-| ✅     | PUT    | `/friends/accept `                                 |
-| ✅     | DELETE | `/friends/remove/ `                                |
-| ✅     | DELETE | `/friends/ignore/ `                                |
 | ✅     | PATCH  | `/users/block/:user `                              |
 | ✅     | PATCH  | `/users/unblock/:user `                            |
-| ✅     | POST   | `/users/:user `                                    |
-| ✅     | DELETE | `/users/:user/delete/ `                            |
-| ✅     | PUT    | `/users/:user/pin/ `                               |
-| ✅     | DELETE | `/users/:user/unpin/ `                             |
-| ✅     | PATCH  | `/users/:user/edit/ `                              |
 | ❌     | PUT    | `/guild/:guild/channels `                          |
 | ❌     | PUT    | `/guild/:guild/roles `                             |
 | ❌     | DELETE | `/guild/:guild/channels/delete `                   |

@@ -99,11 +99,15 @@ export default function Profile({
                     }}
                 >
                     <span className="username">{username}</span>
-                    <div className="roll">
-                        <span className="status">​</span>
-                        <span className="status show">{status}</span>
-                        <span className="status hide">{tag}</span>
-                    </div>
+                    {status ? (
+                        <div className="roll">
+                            <span className="status">​</span>
+                            <span className="status show">{status.length > 19 ? status.slice(0, 19) + "..." : status}</span>
+                            <span className="status hide">#{tag}</span>
+                        </div>
+                    ) : (
+                        <span className="status">#{tag}</span>
+                    )}
                     <div
                         className={`tooltiptext-top ${
                             copiedMessage.toUpperCase() === copiedMessage ? "red" : "green"

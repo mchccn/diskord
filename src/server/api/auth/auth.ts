@@ -64,14 +64,21 @@ auth.put("/signup", async (req, res) => {
 
     const hashedPassword = await argon2.hash(password);
 
-    await users.create({
+    const newUser = await users.create({
         email,
         password: hashedPassword,
         username,
         avatar: DEFAULT_ICON,
+        tag: "xxxx".replace(/x/g, () => Math.floor(Math.random() * 10).toString()),
     });
 
-    return res.sendStatus(200);
+    return req.logIn(newUser, (error) => {
+        if (error) return res.status(401).json(error);
+
+        return res.status(200).json({
+            message: "You have signed up!",
+        });
+    });
 });
 
 auth.patch("/change", AUTHENTICATE, async (req, res) => {
@@ -108,7 +115,7 @@ auth.patch("/change", AUTHENTICATE, async (req, res) => {
 
     await user.save();
 
-    return res.sendStatus(200).json({
+    return res.status(200).json({
         message: "Password was updated.",
     });
 });

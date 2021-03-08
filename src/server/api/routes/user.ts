@@ -119,6 +119,11 @@ user.patch("/profile/status", async (req, res) => {
     });
 
     if (user) {
+        if (status.length > 128)
+            return res.json(400).json({
+                message: "Status is over 128 characters.",
+            });
+
         user.status = status;
 
         await user.save();

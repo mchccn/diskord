@@ -2,11 +2,11 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Meta from "../components/meta";
 import Profile from "../components/profile";
-import { DEFAULT_ICON } from "../server/constants";
+import { IUser } from "../server/database/models/user";
 
 // ! fix scrolling
 
-export default function DiskordApp() {
+export default function DiskordApp({ user }: { user: IUser }) {
     return (
         <div>
             <Meta />
@@ -50,7 +50,7 @@ export default function DiskordApp() {
                         <div className="top"></div>
                         <div className="chat">
                             <div className="channels"></div>
-                            <Profile username={"Username"} tag={"atag"} status={"Some generic status"} avatar={DEFAULT_ICON} />
+                            <Profile username={user.username} tag={user.tag} status={user.status} avatar={user.avatar} />
                         </div>
                     </div>
                     <div className="app">
@@ -241,6 +241,9 @@ export default function DiskordApp() {
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
-        props: {},
+        props: {
+            //@ts-ignore
+            user: JSON.parse(JSON.stringify(ctx.req.user)),
+        },
     };
 };
