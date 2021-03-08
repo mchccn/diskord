@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;1,300&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;1,200;1,300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;1,200;1,300;1,400;1,600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&display=swap");
 
 *,
@@ -20,11 +20,14 @@ html {
     --fs-h4: 1.25rem;
     --fs-body: 1rem;
 
+    --clr-black: #111111;
     --clr-dark: #212225;
+    --clr-darker-grey: #2a2b2f;
     --clr-dark-grey: #303136;
     --clr-grey: #37393f;
-    --clr-lighter-grey: #40444b;
-    --clr-light-grey: #8e9297;
+    --clr-light-grey: #40444b;
+    --clr-lighter-grey: #8e9297;
+    --clr-lightest-grey: #babbbe;
     --clr-light: #ffffff;
     --clr-blue: #00b0f4;
     --clr-green: #43b581;
@@ -35,7 +38,7 @@ html {
 
     scroll-behavior: smooth;
 
-    overflow-x: hidden;
+    overflow: hidden;
     overscroll-behavior: none;
 }
 
@@ -154,4 +157,108 @@ a:hover {
         --fs-h4: 1.6rem;
         --fs-body: 1.2rem;
     }
+}
+
+/*  */
+
+.tooltip-left {
+    position: relative;
+}
+
+.tooltip-left .tooltiptext-left {
+    pointer-events: none;
+    opacity: 0;
+    width: max-content;
+    background-color: var(--clr-black);
+    color: var(--clr-light);
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    left: 120%;
+    transition: 0.1s opacity ease;
+    display: flex;
+}
+
+.tooltip-left .tooltiptext-left::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent black transparent transparent;
+}
+
+.tooltip-left:hover .tooltiptext-left {
+    opacity: 1;
+}
+
+.tooltiptext-left span {
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    margin: 2px 8px;
+}
+
+/*  */
+
+.tooltip-top {
+    position: relative;
+}
+
+.tooltip-top .tooltiptext-top {
+    pointer-events: none;
+    opacity: 0;
+    width: max-content;
+    background-color: var(--clr-black);
+    color: var(--clr-light);
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: -120%;
+    transition: 0.1s opacity ease;
+    display: flex;
+}
+
+.tooltip-top .tooltiptext-top::after {
+    content: " ";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+
+.tooltip-top:hover .tooltiptext-top {
+    opacity: 1;
+}
+
+.tooltiptext-top span {
+    font-size: 0.75rem;
+    flex-shrink: 0;
+    margin: 2px 12px;
+}
+
+.green-tooltiptext {
+    color: var(--clr-light) !important;
+    background-color: var(--clr-green) !important;
+}
+
+.green-tooltiptext::after {
+    border-color: var(--clr-green) transparent transparent transparent !important;
+}
+
+.red-tooltiptext {
+    color: var(--clr-light) !important;
+    background-color: var(--clr-red) !important;
+}
+
+.red-tooltiptext::after {
+    border-color: var(--clr-red) transparent transparent transparent !important;
 }
