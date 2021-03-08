@@ -15,7 +15,7 @@ auth.post("/login", async (req, res) => {
         return req.logIn(user, (error) => {
             if (error) return res.json(error);
 
-            return res.redirect("/home");
+            return res.redirect("/app");
         });
     })(req, res);
 });

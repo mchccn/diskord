@@ -7,6 +7,7 @@ import { ObjectId } from "mongodb";
 import next from "next";
 import passport from "passport";
 import { Server, Socket } from "socket.io";
+import { AUTHENTICATE } from "./server/constants";
 import connect from "./server/database/connect";
 import users from "./server/database/models/user";
 
@@ -74,6 +75,16 @@ export { dev, port, app, handle, server, http, io };
         );
 
         server.use("/api", api);
+
+        server.get("/login", (req, res) => (req.user ? res.redirect("/app") : handle(req, res)));
+
+        server.get("/users", (req, res) => res.redirect("/app"));
+        server.get("/channels", (req, res) => res.redirect("/app"));
+        server.get("/channels/:guild", (req, res) => res.redirect("/app"));
+
+        server.use("/app", AUTHENTICATE);
+        server.use("/users/:user", AUTHENTICATE);
+        server.use("/channels/:guild/:channel", AUTHENTICATE);
 
         server.get("*", (req, res) => handle(req, res));
 

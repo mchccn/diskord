@@ -14,7 +14,7 @@ export default function Home({ isLoggedIn }: { isLoggedIn: boolean }) {
                     <h1>Diskord</h1>
                     <p>a simple discord clone</p>
                     <section>
-                        <a href={isLoggedIn ? `/home` : `/login`} className="discord">
+                        <a href={isLoggedIn ? `/app` : `/login`} className="discord">
                             {isLoggedIn ? "Open" : "Log In"}
                         </a>
                         <a href="/docs" className="docs">
@@ -33,6 +33,10 @@ export default function Home({ isLoggedIn }: { isLoggedIn: boolean }) {
                     display: grid;
                     place-items: center;
                     text-align: center;
+                }
+
+                main {
+                    transform: scale(0.8);
                 }
 
                 h1 {
@@ -83,6 +87,12 @@ export default function Home({ isLoggedIn }: { isLoggedIn: boolean }) {
                     background-color: var(--clr-dark);
                     color: var(--clr-blue);
                     border-radius: 4px;
+                }
+
+                @media (min-width: 640px) {
+                    main {
+                        transform: scale(1);
+                    }
                 }
             `}</style>
         </div>
