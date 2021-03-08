@@ -2,6 +2,8 @@
 
 #### Implement permissions for routes.
 
+#### Add websocket pings when a state is updated.
+
 ### API Routes (prefixed with '/api')
 
 | STATUS | METHOD | ROUTE                                              |
@@ -28,10 +30,11 @@
 | ✅     | DELETE | `/friends/ignore/ `                                |
 | ✅     | PATCH  | `/users/block/:user `                              |
 | ✅     | PATCH  | `/users/unblock/:user `                            |
-| ❌     | POST   | `/users/:user `                                    |
-| ❌     | DELETE | `/users/:user/delete/ `                            |
-| ❌     | PUT    | `/users/:user/pin/ `                               |
-| ❌     | PATCH  | `/users/:user/edit/ `                              |
+| ✅     | POST   | `/users/:user `                                    |
+| ✅     | DELETE | `/users/:user/delete/ `                            |
+| ✅     | PUT    | `/users/:user/pin/ `                               |
+| ✅     | DELETE | `/users/:user/unpin/ `                             |
+| ✅     | PATCH  | `/users/:user/edit/ `                              |
 | ❌     | PUT    | `/guild/:guild/channels `                          |
 | ❌     | PUT    | `/guild/:guild/roles `                             |
 | ❌     | DELETE | `/guild/:guild/channels/delete `                   |
