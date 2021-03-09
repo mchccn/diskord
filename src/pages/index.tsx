@@ -1,11 +1,11 @@
 import { GetServerSideProps } from "next";
 import Head from "next/head";
-import Meta from "../components/meta";
+import Meta from "../components/meta/meta";
 
 export default function Home({ isLoggedIn }: { isLoggedIn: boolean }) {
     return (
         <div>
-            <Meta />
+            <Meta isLightTheme={false} />
             <Head>
                 <title>diskord</title>
             </Head>

@@ -37,12 +37,18 @@ export { dev, port, app, handle, server, http, io };
         await app.prepare();
 
         io.on("connection", async (socket: Socket) => {
-            socket.on("verify", async (id) => {
-                if (!ObjectId.isValid(id)) return socket.emit("invalid", id);
+            socket.on("verify", async (id, password) => {
+                if (!ObjectId.isValid(id)) return socket.emit("invalid");
 
-                if (!(await users.findById(id))) return socket.emit("invalid", id);
+                const user = await users.findById(id);
+
+                if (!user) return socket.emit("invalid");
+
+                if (user.password !== password) return socket.emit("invalid");
 
                 sockets[id] = socket;
+
+                socket.emit("verified");
 
                 return socket.on("disconnect", () => delete sockets[id]);
             });

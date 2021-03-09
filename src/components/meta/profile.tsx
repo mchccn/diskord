@@ -59,6 +59,9 @@ export default function Profile({
         if (streak && can) {
             setIndex((index + 1) % streaks.length);
             clearTimeout(set);
+        } else if (!can) {
+            setIndex(0);
+            clearTimeout(set);
         }
 
         setCopied(false);

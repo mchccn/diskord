@@ -1,0 +1,19 @@
+html {
+    --clr-actual-black: #ffffff !important;
+    --clr-black: #eeeeee !important;
+    --clr-dark: #e4e5e8 !important;
+    --clr-darkest-grey: #f2f3f5 !important;
+    --clr-even-darker-grey: #ecedef !important;
+    --clr-darker-grey: #ecedef !important;
+    --clr-dark-grey: #ffffff !important;
+    --clr-grey: #e7eaed !important;
+    --clr-light-grey: #ecedef !important;
+    --clr-lighter-grey: #6a7481 !important;
+    --clr-even-lighter-grey: #dcddde !important;
+    --clr-lightest-grey: #4f5660 !important;
+    --clr-light: #000000 !important;
+    --clr-blue: #0267e0 !important;
+    --clr-green: #43b581 !important;
+    --clr-red: #f04847 !important;
+    --clr-discord: #7289da !important;
+}

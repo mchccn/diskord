@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { IUser } from "../server/database/models/user";
+import { IUser } from "../../server/database/models/user";
 
 export default function Lobby({ user, setSettings }: { user: IUser; setSettings: Dispatch<SetStateAction<boolean>> }) {
     return (

@@ -1,8 +1,8 @@
 import React, { Dispatch, SetStateAction } from "react";
-import { IChannel } from "../server/database/models/channel";
-import { IGuild } from "../server/database/models/guild";
-import { IUser } from "../server/database/models/user";
-import Profile from "./profile";
+import { IChannel } from "../../server/database/models/channel";
+import { IGuild } from "../../server/database/models/guild";
+import { IUser } from "../../server/database/models/user";
+import Profile from "../meta/profile";
 
 export default function Main({
     user,

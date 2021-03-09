@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-export default function Meta() {
+export default function Meta({ isLightTheme }: { isLightTheme: boolean }) {
     return (
         <Head>
             <meta charSet="utf-8" />
@@ -10,6 +10,7 @@ export default function Meta() {
             <meta name="copyright" content="" />
             <meta name="robots" content="follow" />
             <meta name="theme-color" content="" />
+
             <meta property="og:type" content="website" />
             <meta property="og:url" content="" />
             <meta property="og:site_name" content="" />
@@ -18,11 +19,13 @@ export default function Meta() {
             <meta property="og:title" content="" />
             <meta property="og:description" content="" />
             <meta property="og:image" content="" />
+
             <meta property="twitter:site" content="" />
             <meta property="twitter:site:id" content="" />
             <meta property="twitter:creator" content="" />
             <meta property="twitter:creator:id" content="" />
-            <meta property="og:image" content="" />
+
+            {isLightTheme ? <link rel="stylesheet" href="/light.css" /> : null}
 
             <link rel="shortcut icon" href="/fav.png" type="image/x-icon" />
         </Head>

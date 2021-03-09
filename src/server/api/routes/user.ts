@@ -34,6 +34,8 @@ user.patch("/appearance", async (req, res) => {
         if (typeof isLightTheme === "boolean") user.appearance.isLightTheme = isLightTheme;
         if (typeof isCompactMode === "boolean") user.appearance.isCompactMode = isCompactMode;
 
+        user.markModified("appearance");
+
         await user.save();
     }
 

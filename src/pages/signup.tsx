@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import Meta from "../components/meta";
+import Meta from "../components/meta/meta";
 
 export default function Login() {
     const router = useRouter();
@@ -17,7 +17,7 @@ export default function Login() {
 
     return (
         <div>
-            <Meta />
+            <Meta isLightTheme={false} />
             <Head>
                 <title>sign up</title>
             </Head>

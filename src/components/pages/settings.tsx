@@ -1,5 +1,6 @@
-import { Dispatch, SetStateAction, useEffect } from "react";
-import { IUser } from "../server/database/models/user";
+import debounce from "lodash/debounce";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { IUser } from "../../server/database/models/user";
 
 export default function Settings({
     user,
@@ -10,6 +11,23 @@ export default function Settings({
     active: boolean;
     setSettings: Dispatch<SetStateAction<boolean>>;
 }) {
+    const [light, setLight] = useState(user.appearance.isLightTheme);
+    const [size, setSize] = useState(user.appearance.fontSize);
+    const [compact, setCompact] = useState(user.appearance.isCompactMode);
+
+    const updateAppearance = debounce(async () => {
+        await fetch("/api/user/appearance", {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            credentials: "include",
+            body: JSON.stringify({
+                appearance: { isLightTheme: light, fontSize: size, isCompactMode: compact },
+            }),
+        });
+    }, 50);
+
     useEffect(() => {
         const escape = (e: KeyboardEvent) => (e.code === "Escape" ? setSettings(false) : undefined);
 
@@ -18,10 +36,15 @@ export default function Settings({
         return () => document.removeEventListener("keydown", escape);
     });
 
+    useEffect(() => {
+        (async () => {
+            updateAppearance();
+        })();
+    }, [light, size, compact]);
+
     return (
         <>
-            {/* <div className={`settings${active ? " active" : ""}`}> */}
-            <div className="settings active">
+            <div className={`settings${active ? " active" : ""}`}>
                 <div>
                     <div className="top">
                         <div className="profile">
@@ -43,20 +66,42 @@ export default function Settings({
                     </div>
                     <div className="middle">
                         <div className="checkbox-container">
-                            <label htmlFor="toggle1">Toggle light theme</label>
-                            <input className="checkbox" type="checkbox" name="toggle1" />
+                            <label htmlFor="light">Toggle light theme</label>
+                            <input
+                                className="checkbox"
+                                type="checkbox"
+                                name="light"
+                                checked={light}
+                                onChange={async (e) => setLight(e.target.checked)}
+                            />
                             <div className="checkbox-visual">
                                 <div></div>
                             </div>
                         </div>
                         <div className="checkbox-container">
-                            <label htmlFor="toggle1">Toggle compact mode</label>
-                            <input className="checkbox" type="checkbox" name="toggle1" />
+                            <label htmlFor="compact">Toggle compact mode</label>
+                            <input
+                                className="checkbox"
+                                type="checkbox"
+                                name="compact"
+                                checked={compact}
+                                onChange={async (e) => setCompact(e.target.checked)}
+                            />
                             <div className="checkbox-visual">
                                 <div></div>
                             </div>
                         </div>
-                        {/* Add slider for font size */}
+                        <div className="slider">
+                            <label htmlFor="size">Font size: {size}</label>
+                            <input
+                                type="range"
+                                min={12}
+                                max={24}
+                                name="size"
+                                value={size}
+                                onChange={(e) => setSize(parseInt(e.target.value) || 16)}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -104,6 +149,11 @@ export default function Settings({
 
                 .display h4 {
                     margin: 1rem;
+                }
+
+                .slider {
+                    display: flex;
+                    align-items: center;
                 }
             `}</style>
             <style jsx>{`
@@ -158,7 +208,7 @@ export default function Settings({
 
                     pointer-events: none;
 
-                    transition: 0.15s transform ease, 0.15s opacity ease;
+                    transition: 0.25s transform ease, 0.15s opacity ease;
 
                     display: grid;
                     place-items: center;
