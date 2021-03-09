@@ -27,8 +27,8 @@ export default function DiskordApp({ user, guilds }: { user: IUser; guilds: { na
 
                 const channels = await (await fetch(`/api/get/guilds/${currentGuildId}/channels`)).json();
 
-                if (guild) setCurrentGuild(guild ?? undefined);
-            }
+                if (guild) setCurrentGuild(guild ? { ...guild, channels } : undefined);
+            } else setCurrentGuild(undefined);
         })();
     }, [currentGuildId]);
 
@@ -40,7 +40,7 @@ export default function DiskordApp({ user, guilds }: { user: IUser; guilds: { na
                 const channel = await res.json();
 
                 if (channel) setCurrentChannel(channel ?? undefined);
-            }
+            } else setCurrentChannel(undefined);
         })();
     }, [currentChannelId]);
 
@@ -52,7 +52,11 @@ export default function DiskordApp({ user, guilds }: { user: IUser; guilds: { na
             </Head>
             <div className="root">
                 <Servers guilds={guilds} setGuild={setCurrentGuildId} setChannel={setCurrentChannelId} />
-                {!currentGuildId && !currentChannelId ? <Documentation /> : <Main user={user} />}
+                {!currentGuild || !currentChannel ? (
+                    <Documentation />
+                ) : (
+                    <Main user={user} guild={currentGuild} channel={currentChannel} />
+                )}
             </div>
             <style jsx>{`
                 .root {

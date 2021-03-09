@@ -1,8 +1,18 @@
 import React from "react";
+import { IChannel } from "../server/database/models/channel";
+import { IGuild } from "../server/database/models/guild";
 import { IUser } from "../server/database/models/user";
 import Profile from "./profile";
 
-export default function Main({ user }: { user: IUser }) {
+export default function Main({
+    user,
+    guild,
+    channel,
+}: {
+    user: IUser;
+    guild: IGuild & { channels: IChannel[] };
+    channel: IChannel;
+}) {
     return (
         <>
             <div className="main">
@@ -19,7 +29,7 @@ export default function Main({ user }: { user: IUser }) {
                         <div className="chat">
                             <div className="messages"></div>
                             <div className="form">
-                                <textarea placeholder="Message #some-chat"></textarea>
+                                <textarea placeholder={`Message #${channel.name}`}></textarea>
                             </div>
                         </div>
                         <div className="right"></div>
