@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 // ! Add modal pop up to edit status
 
@@ -7,11 +7,13 @@ export default function Profile({
     tag,
     status,
     avatar,
+    setSettings,
 }: {
     username: string;
     tag: string;
     status: string;
     avatar: string;
+    setSettings: Dispatch<SetStateAction<boolean>>;
 }) {
     const streaks = [
         "Copied!",
@@ -119,7 +121,7 @@ export default function Profile({
                         <span className={shake}>{copiedMessage}</span>
                     </div>
                 </div>
-                <a className="settings">
+                <a className="settings" onClick={() => setSettings(true)}>
                     <svg width="20" height="20" viewBox="0 0 24 24">
                         <path
                             fill="currentColor"
@@ -142,7 +144,7 @@ export default function Profile({
                 }
 
                 .profile img {
-                    object-fit: contain;
+                    object-fit: cover;
                     width: 32px;
                     height: 32px;
                     border-radius: 50%;

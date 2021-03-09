@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { IChannel } from "../server/database/models/channel";
 import { IGuild } from "../server/database/models/guild";
 import { IUser } from "../server/database/models/user";
@@ -8,10 +8,12 @@ export default function Main({
     user,
     guild,
     channel,
+    setSettings,
 }: {
     user: IUser;
     guild: IGuild & { channels: IChannel[] };
     channel: IChannel;
+    setSettings: Dispatch<SetStateAction<boolean>>;
 }) {
     return (
         <>
@@ -20,7 +22,13 @@ export default function Main({
                     <div className="top"></div>
                     <div className="chat">
                         <div className="channels"></div>
-                        <Profile username={user.username} tag={user.tag} status={user.status} avatar={user.avatar} />
+                        <Profile
+                            username={user.username}
+                            tag={user.tag}
+                            status={user.status}
+                            avatar={user.avatar}
+                            setSettings={setSettings}
+                        />
                     </div>
                 </div>
                 <div className="app">
