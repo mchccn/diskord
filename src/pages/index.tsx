@@ -14,11 +14,11 @@ export default function Home({ isLoggedIn }: { isLoggedIn: boolean }) {
                     <h1>Diskord</h1>
                     <p>a simple discord clone</p>
                     <section>
-                        <a href={isLoggedIn ? `/app` : `/login`} className="discord">
+                        <a href={isLoggedIn ? `/app` : `/login`} className="diskord">
                             {isLoggedIn ? "Open" : "Log In"}
                         </a>
-                        <a href="/docs" className="docs">
-                            Documentation
+                        <a href="https://discord.gg/WaEqT29vQb" target="_blank" rel="nofollow" className="discord">
+                            Discord
                         </a>
                         <a href="https://github.com/cursorsdottsx/diskord" target="_blank" rel="nofollow" className="github">
                             GitHub
@@ -29,7 +29,7 @@ export default function Home({ isLoggedIn }: { isLoggedIn: boolean }) {
             <style jsx>{`
                 div {
                     min-height: 100vh;
-                    background-color: var(--clr-grey);
+                    background-color: var(--clr-dark-grey);
                     display: grid;
                     place-items: center;
                     text-align: center;
@@ -71,21 +71,21 @@ export default function Home({ isLoggedIn }: { isLoggedIn: boolean }) {
                     text-decoration: none;
                 }
 
-                .discord {
+                .diskord {
                     background-color: var(--clr-discord);
                     color: var(--clr-light);
+                    border-radius: 4px;
+                }
+
+                .discord {
+                    background-color: var(--clr-dark);
+                    color: var(--clr-blue);
                     border-radius: 4px;
                 }
 
                 .github {
                     background-color: var(--clr-light);
                     color: var(--clr-dark);
-                    border-radius: 4px;
-                }
-
-                .docs {
-                    background-color: var(--clr-dark);
-                    color: var(--clr-blue);
                     border-radius: 4px;
                 }
 

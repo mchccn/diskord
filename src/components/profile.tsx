@@ -133,7 +133,7 @@ export default function Profile({
             <style jsx>{`
                 .profile {
                     height: 52px;
-                    background-color: var(--clr-darker-grey);
+                    background-color: var(--clr-darkest-grey);
 
                     display: flex;
                     align-items: center;
@@ -230,7 +230,7 @@ export default function Profile({
                 }
 
                 .settings:hover {
-                    background-color: var(--clr-grey);
+                    background-color: var(--clr-dark-grey);
                 }
 
                 .shake {

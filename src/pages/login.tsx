@@ -60,7 +60,7 @@ export default function Login() {
             <style jsx>{`
                 div {
                     min-height: 100vh;
-                    background-color: var(--clr-grey);
+                    background-color: var(--clr-dark-grey);
                     display: grid;
                     place-items: center;
                     text-align: center;

@@ -22,11 +22,14 @@ html {
 
     --clr-black: #111111;
     --clr-dark: #212225;
-    --clr-darker-grey: #2a2b2f;
-    --clr-dark-grey: #303136;
-    --clr-grey: #37393f;
+    --clr-darkest-grey: #2a2b2f;
+    --clr-even-darker-grey: #303136;
+    --clr-darker-grey: #36373c;
+    --clr-dark-grey: #37393f;
+    --clr-grey: #3a3c43;
     --clr-light-grey: #40444b;
     --clr-lighter-grey: #8e9297;
+    --clr-even-lighter-grey: #dcddde;
     --clr-lightest-grey: #babbbe;
     --clr-light: #ffffff;
     --clr-blue: #00b0f4;
@@ -47,7 +50,7 @@ body {
     height: 100%;
     font-family: var(--ff-primary);
     font-size: var(--fs-body);
-    background-color: var(--clr-grey);
+    background-color: var(--clr-dark-grey);
     color: var(--clr-light);
 }
 
@@ -179,6 +182,7 @@ a:hover {
     left: 120%;
     transition: 0.1s opacity ease;
     display: flex;
+    user-select: none;
 }
 
 .tooltip-left .tooltiptext-left::after {
@@ -222,6 +226,7 @@ a:hover {
     top: -120%;
     transition: 0.1s opacity ease;
     display: flex;
+    user-select: none;
 }
 
 .tooltip-top .tooltiptext-top::after {
