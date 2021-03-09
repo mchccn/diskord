@@ -4,14 +4,6 @@
 
 #### Add websocket pings when a state is updated.
 
-### Routes
-
-| STATUS | ROUTE    |
-| ------ | -------- |
-| ✅     | `/ `     |
-| ❌     | `/app `  |
-| ❌     | `/docs ` |
-
 ### API Routes (prefixed with '/api')
 
 | STATUS | METHOD | ROUTE                                              |
