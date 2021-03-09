@@ -15,17 +15,33 @@ import { IUser } from "../server/database/models/user";
 export default function DiskordApp({ user, guilds }: { user: IUser; guilds: { name: string; icon: string; id: string }[] }) {
     const [currentGuildId, setCurrentGuildId] = useState("");
     const [currentChannelId, setCurrentChannelId] = useState("");
-    const [currentGuild, setCurrentGuild] = useState<IGuild | undefined>(undefined);
+    const [currentGuild, setCurrentGuild] = useState<(IGuild & { channels: IChannel[] }) | undefined>(undefined);
     const [currentChannel, setCurrentChannel] = useState<IChannel | undefined>(undefined);
 
     useEffect(() => {
-        if (currentGuildId) {
-        }
+        (async () => {
+            if (currentGuildId) {
+                const res = await fetch(`/api/get/guilds/${currentGuildId}`);
+
+                const guild = await res.json();
+
+                const channels = await (await fetch(`/api/get/guilds/${currentGuildId}/channels`)).json();
+
+                if (guild) setCurrentGuild(guild ?? undefined);
+            }
+        })();
     }, [currentGuildId]);
 
     useEffect(() => {
-        if (currentChannelId) {
-        }
+        (async () => {
+            if (currentChannelId) {
+                const res = await fetch(`/api/get/channels/${currentChannelId}`);
+
+                const channel = await res.json();
+
+                if (channel) setCurrentChannel(channel ?? undefined);
+            }
+        })();
     }, [currentChannelId]);
 
     return (

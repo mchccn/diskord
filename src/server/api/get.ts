@@ -35,9 +35,10 @@ get.get("/channels/:id/messages/:count", async (req, res) => {
         .find({
             channel: id,
         })
-        .limit(parseInt(count));
+        .limit(parseInt(count))
+        .sort({ $natural: -1 });
 
-    return res.status(channelMessages ? 200 : 404).json(channelMessages);
+    return res.status(200).json(channelMessages);
 });
 
 get.get("/guilds/:id", async (req, res) => {
@@ -48,6 +49,54 @@ get.get("/guilds/:id", async (req, res) => {
     const guild = await guilds.findById(id);
 
     return res.status(guild ? 200 : 404).json(guild);
+});
+
+get.get("/guilds/:id/channels", async (req, res) => {
+    const { id } = req.params;
+
+    if (!ObjectId.isValid(id)) return res.status(404).json(null);
+
+    const guild = await guilds.findById(id);
+
+    if (!guild) return res.status(404).json(null);
+
+    const guildChannels = await channels.find({
+        guild: id,
+    });
+
+    return res.status(200).json(guildChannels);
+});
+
+get.get("/guilds/:id/roles", async (req, res) => {
+    const { id } = req.params;
+
+    if (!ObjectId.isValid(id)) return res.status(404).json(null);
+
+    const guild = await guilds.findById(id);
+
+    if (!guild) return res.status(404).json(null);
+
+    const guildRoles = await roles.find({
+        guild: id,
+    });
+
+    return res.status(200).json(guildRoles);
+});
+
+get.get("/guilds/:id/members", async (req, res) => {
+    const { id } = req.params;
+
+    if (!ObjectId.isValid(id)) return res.status(404).json(null);
+
+    const guild = await guilds.findById(id);
+
+    if (!guild) return res.status(404).json(null);
+
+    const guildMembers = await members.find({
+        guild: id,
+    });
+
+    return res.status(200).json(guildMembers);
 });
 
 get.get("/invites/:id", async (req, res) => {
