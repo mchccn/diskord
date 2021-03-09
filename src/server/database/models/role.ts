@@ -7,26 +7,33 @@ export interface IRole extends Document {
     name: string;
     color: string;
     permissions: Permissions[];
+    createdAt: string;
+    updatedAt: string;
 }
 
-export const roleSchema = new Schema({
-    guild: {
-        type: ObjectId,
-        required: true,
+export const roleSchema = new Schema(
+    {
+        guild: {
+            type: ObjectId,
+            required: true,
+        },
+        name: {
+            type: String,
+            required: true,
+        },
+        color: {
+            type: String,
+            required: true,
+        },
+        permissions: {
+            type: [String],
+            required: true,
+        },
     },
-    name: {
-        type: String,
-        required: true,
-    },
-    color: {
-        type: String,
-        required: true,
-    },
-    permissions: {
-        type: [String],
-        required: true,
-    },
-});
+    {
+        timestamps: true,
+    }
+);
 
 const roles = (models["roles"] as Model<IRole>) || model<IRole>("roles", roleSchema);
 

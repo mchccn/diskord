@@ -16,63 +16,70 @@ export interface IUser extends Document {
     friends: string[];
     status: string;
     tag: string;
+    createdAt: string;
+    updatedAt: string;
 }
 
-export const userSchema = new Schema({
-    email: {
-        type: String,
-        required: true,
-    },
-    username: {
-        type: String,
-        required: true,
-    },
-    password: {
-        type: String,
-        required: true,
-    },
-    appearance: {
-        type: {
-            isLightTheme: {
-                type: Boolean,
-                default: false,
+export const userSchema = new Schema(
+    {
+        email: {
+            type: String,
+            required: true,
+        },
+        username: {
+            type: String,
+            required: true,
+        },
+        password: {
+            type: String,
+            required: true,
+        },
+        appearance: {
+            type: {
+                isLightTheme: {
+                    type: Boolean,
+                    default: false,
+                },
+                fontSize: {
+                    type: Number,
+                    default: 16,
+                },
+                isCompactMode: {
+                    type: Boolean,
+                    default: false,
+                },
             },
-            fontSize: {
-                type: Number,
-                default: 16,
-            },
-            isCompactMode: {
-                type: Boolean,
-                default: false,
+            default: {
+                isLightTheme: false,
+                fontSize: 16,
+                isCompactMode: false,
             },
         },
-        default: {
-            isLightTheme: false,
-            fontSize: 16,
-            isCompactMode: false,
+        avatar: {
+            type: String,
+            required: true,
+        },
+        guilds: {
+            type: [ObjectId],
+            default: [],
+        },
+        blocked: {
+            type: [ObjectId],
+            default: [],
+        },
+        status: {
+            type: String,
+            default: "",
+        },
+        tag: {
+            type: String,
+            required: true,
         },
     },
-    avatar: {
-        type: String,
-        required: true,
-    },
-    guilds: {
-        type: [ObjectId],
-        default: [],
-    },
-    blocked: {
-        type: [ObjectId],
-        default: [],
-    },
-    status: {
-        type: String,
-        default: "",
-    },
-    tag: {
-        type: String,
-        required: true,
-    },
-});
+    {
+        timestamps: true,
+    }
+);
 
 const users = (models["users"] as Model<IUser>) || model<IUser>("users", userSchema);
 

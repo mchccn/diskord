@@ -6,24 +6,27 @@ import Documentation from "../components/docs";
 import Main from "../components/main";
 import Meta from "../components/meta";
 import Servers from "../components/servers";
-import guilds from "../server/database/models/guild";
+import { IChannel } from "../server/database/models/channel";
+import guilds, { IGuild } from "../server/database/models/guild";
 import { IUser } from "../server/database/models/user";
 
 // ! fix scrolling
 
 export default function DiskordApp({ user, guilds }: { user: IUser; guilds: { name: string; icon: string; id: string }[] }) {
-    const [currentGuild, setCurrentGuild] = useState("");
-    const [currentChannel, setCurrentChannel] = useState("");
+    const [currentGuildId, setCurrentGuildId] = useState("");
+    const [currentChannelId, setCurrentChannelId] = useState("");
+    const [currentGuild, setCurrentGuild] = useState<IGuild | undefined>(undefined);
+    const [currentChannel, setCurrentChannel] = useState<IChannel | undefined>(undefined);
 
     useEffect(() => {
-        if (currentGuild) {
+        if (currentGuildId) {
         }
-    }, [currentGuild]);
+    }, [currentGuildId]);
 
     useEffect(() => {
-        if (currentChannel) {
+        if (currentChannelId) {
         }
-    }, [currentChannel]);
+    }, [currentChannelId]);
 
     return (
         <div>
@@ -32,8 +35,8 @@ export default function DiskordApp({ user, guilds }: { user: IUser; guilds: { na
                 <title>diskord</title>
             </Head>
             <div className="root">
-                <Servers guilds={guilds} setGuild={setCurrentGuild} setChannel={setCurrentChannel} />
-                {!currentGuild && !currentChannel ? <Documentation /> : <Main user={user} />}
+                <Servers guilds={guilds} setGuild={setCurrentGuildId} setChannel={setCurrentChannelId} />
+                {!currentGuildId && !currentChannelId ? <Documentation /> : <Main user={user} />}
             </div>
             <style jsx>{`
                 .root {

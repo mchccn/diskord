@@ -9,34 +9,41 @@ export interface IChannel extends Document {
     nsfw: boolean;
     slowmode: number;
     name: string;
+    createdAt: string;
+    updatedAt: string;
 }
 
-export const channelSchema = new Schema({
-    guild: {
-        type: ObjectId,
-        required: true,
+export const channelSchema = new Schema(
+    {
+        guild: {
+            type: ObjectId,
+            required: true,
+        },
+        messages: {
+            type: [messageSchema],
+            default: [],
+        },
+        pinned: {
+            type: [ObjectId],
+            default: [],
+        },
+        nsfw: {
+            type: Boolean,
+            default: false,
+        },
+        slowmode: {
+            type: Number,
+            default: 0,
+        },
+        name: {
+            type: String,
+            required: true,
+        },
     },
-    messages: {
-        type: [messageSchema],
-        default: [],
-    },
-    pinned: {
-        type: [ObjectId],
-        default: [],
-    },
-    nsfw: {
-        type: Boolean,
-        default: false,
-    },
-    slowmode: {
-        type: Number,
-        default: 0,
-    },
-    name: {
-        type: String,
-        required: true,
-    },
-});
+    {
+        timestamps: true,
+    }
+);
 
 const channels = (models["channels"] as Model<IChannel>) || model<IChannel>("channels", channelSchema);
 

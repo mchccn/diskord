@@ -20,6 +20,26 @@ get.get("/channels/:id", async (req, res) => {
     return res.status(channel ? 200 : 404).json(channel);
 });
 
+get.get("/channels/:id/messages/:count", async (req, res) => {
+    const { id, count } = req.params;
+
+    if (!ObjectId.isValid(id)) return res.status(404).json(null);
+
+    if (!parseInt(count)) return res.status(404).json(null);
+
+    const channel = await channels.findById(id);
+
+    if (!channel) return res.status(404).json(null);
+
+    const channelMessages = await messages
+        .find({
+            channel: id,
+        })
+        .limit(parseInt(count));
+
+    return res.status(channelMessages ? 200 : 404).json(channelMessages);
+});
+
 get.get("/guilds/:id", async (req, res) => {
     const { id } = req.params;
 

@@ -10,34 +10,41 @@ export interface IGuild extends Document {
     members: string[];
     name: string;
     icon: string;
+    createdAt: string;
+    updatedAt: string;
 }
 
-export const guildSchema = new Schema({
-    owner: {
-        type: ObjectId,
-        required: true,
+export const guildSchema = new Schema(
+    {
+        owner: {
+            type: ObjectId,
+            required: true,
+        },
+        channels: {
+            type: [channelSchema],
+            default: [],
+        },
+        roles: {
+            type: [roleSchema],
+            default: [],
+        },
+        members: {
+            type: [ObjectId],
+            required: true,
+        },
+        name: {
+            type: String,
+            required: true,
+        },
+        icon: {
+            type: String,
+            required: true,
+        },
     },
-    channels: {
-        type: [channelSchema],
-        default: [],
-    },
-    roles: {
-        type: [roleSchema],
-        default: [],
-    },
-    members: {
-        type: [ObjectId],
-        required: true,
-    },
-    name: {
-        type: String,
-        required: true,
-    },
-    icon: {
-        type: String,
-        required: true,
-    },
-});
+    {
+        timestamps: true,
+    }
+);
 
 const guilds = (models["guilds"] as Model<IGuild>) || model<IGuild>("guilds", guildSchema);
 
