@@ -22,9 +22,9 @@ const server = express();
 const http = createServer(server);
 
 const io = new Server(http, {});
-const sockets: { [id: string]: Socket } = {};
+const sockets: { [id: string]: { guild: string; channel: string; socket: Socket } } = {};
 
-export { dev, port, app, handle, server, http, io };
+export { dev, port, app, handle, server, http, io, sockets };
 
 (async () => {
     try {
@@ -37,7 +37,7 @@ export { dev, port, app, handle, server, http, io };
         await app.prepare();
 
         io.on("connection", async (socket: Socket) => {
-            socket.on("verify", async (id, password) => {
+            socket.on("verify", async (id, password, guild, channel) => {
                 if (!ObjectId.isValid(id)) return socket.emit("invalid");
 
                 const user = await users.findById(id);
@@ -46,7 +46,13 @@ export { dev, port, app, handle, server, http, io };
 
                 if (user.password !== password) return socket.emit("invalid");
 
-                sockets[id] = socket;
+                if (sockets[id]) sockets[id].socket.disconnect(true);
+
+                sockets[id] = {
+                    guild,
+                    channel,
+                    socket,
+                };
 
                 socket.emit("verified");
 

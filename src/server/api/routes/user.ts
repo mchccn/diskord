@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { sockets } from "../../..";
 import { AUTHENTICATE } from "../../constants";
 import users from "../../database/models/user";
 
@@ -37,6 +38,9 @@ user.patch("/appearance", async (req, res) => {
         user.markModified("appearance");
 
         await user.save();
+
+        //@ts-ignore
+        if (sockets[req.user!._id]) sockets[req.user!._id].socket.emit("appearanceUpdate", user.appearance);
     }
 
     return res.status(200).json({
