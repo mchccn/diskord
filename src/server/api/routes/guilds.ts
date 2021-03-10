@@ -93,6 +93,11 @@ guilds.post("/join", async (req, res) => {
     //@ts-ignore
     const user = (await users.findById(req.user!._id))!;
 
+    if (user.guilds.length >= 100)
+        return res.status(403).json({
+            message: "You are in 100 guilds. Leave one to create a guild.",
+        });
+
     user.guilds.push(guild._id);
 
     await user.save();

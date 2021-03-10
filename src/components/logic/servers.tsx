@@ -1,4 +1,5 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
+import Join from "../misc/join";
 
 export default function Servers({
     guilds,
@@ -9,6 +10,8 @@ export default function Servers({
     setGuild: Dispatch<SetStateAction<string>>;
     setChannel: Dispatch<SetStateAction<string>>;
 }) {
+    const [add, setAdd] = useState(false);
+
     return (
         <>
             <div className="servers">
@@ -31,19 +34,14 @@ export default function Servers({
                 </div>
                 <hr />
                 {guilds.map(({ name, icon, id }) => (
-                    <div
-                        className="server tooltip-left"
-                        onClick={() => {
-                            setGuild(id);
-                        }}
-                    >
+                    <div className="server tooltip-left" onClick={() => setGuild(id)}>
                         <img src={icon} alt="" />
                         <div className="tooltiptext-left">
                             <span>{name}</span>
                         </div>
                     </div>
                 ))}
-                <div className="add server tooltip-left">
+                <div className="add server tooltip-left" onClick={() => setAdd(true)}>
                     <svg width="24" height="24" viewBox="0 0 24 24">
                         <path
                             fill="var(--clr-green)"
@@ -55,6 +53,7 @@ export default function Servers({
                     </div>
                 </div>
             </div>
+            <Join active={add} setActive={setAdd} />
             <style jsx>{`
                 .servers {
                     padding-top: 4px;
